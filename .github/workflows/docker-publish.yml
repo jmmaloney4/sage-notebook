@@ -46,15 +46,18 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-          
+      
+      - name: Generate Date-Time
+        id: datetime
+        run: echo "::set-output name=datetime::$(date +'%Y%m%d%H%M')"
+      
       - name: Prep Docker Tags
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: "docker.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}, ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}"
           tag-sha: true
-          tag-schedule: 'YYYYMMDD-HHmmss'
-          tag-custom: "${{ env.SAGE_VERSION }}"
+          tag-custom: "${{ env.SAGE_VERSION }}, ${{ steps.datetime.outputs.datetime }}"
         
       - name: Build and push Docker images
         uses: docker/build-push-action@v2
