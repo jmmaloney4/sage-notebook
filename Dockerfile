@@ -18,8 +18,6 @@ RUN apt-get update && \
     jq && \
     apt-get -y autoremove
 
-USER $NB_UID
-
 # Initialize conda for shell interaction
 RUN conda init bash
 
@@ -74,3 +72,4 @@ RUN sudo jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/s
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
+USER $NB_UID
