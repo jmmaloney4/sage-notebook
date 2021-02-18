@@ -9,6 +9,7 @@ on:
 
 env:
   IMAGE_NAME: sage-notebook
+  SAGE_VERSION: 9.2
 
 jobs:
   push:
@@ -49,12 +50,16 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64
+          build-args:
+          - SAGE_VERSION: {{ env.SAGE_VERSION }}
           push: true
           tags: |
             docker.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
             docker.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{github.run_number}}
+            docker.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.SAGE_VERSION }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{github.run_number}}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.SAGE_VERSION }}
       
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
