@@ -5,7 +5,7 @@ ARG SAGE_PYTHON_VERSION=3.9
 
 RUN echo "Building image with Sage $SAGE_VERSION"
 
-USER root
+USER $NB_UID
 
 # Sage pre-requisites and jq for manipulating json
 RUN apt-get update && \
@@ -67,9 +67,13 @@ RUN conda update conda && \
 
 RUN echo $CONDA_DIR
 
+USER root
+
 # Install sage's python kernel
-RUN jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+RUN jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath
 
 USER $NB_UID
+
+RUN fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
