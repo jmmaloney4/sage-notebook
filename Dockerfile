@@ -1,5 +1,5 @@
-ARG SAGE_VERSION=9.0
-ARG SAGE_PYTHON_VERSION=3.7
+ARG SAGE_VERSION=9.2
+ARG SAGE_PYTHON_VERSION=3.9
 ARG BASE_CONTAINER=jupyter/minimal-notebook
 FROM $BASE_CONTAINER
 
@@ -14,8 +14,8 @@ RUN apt-get update && \
     texlive \
     tk tk-dev \
     jq && \
-    rm -rf /var/lib/apt/lists/*
-
+    apt-get -y upgrade && \
+    apt-get -y autoremove
 
 USER $NB_UID
 
@@ -23,8 +23,10 @@ USER $NB_UID
 RUN conda init bash
 
 # Install Sage conda environment
-RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension && \
-    conda create --quiet --yes -n sage -c conda-forge sage=$SAGE_VERSION python=$SAGE_PYTHON_VERSION && \
+RUN conda update conda && \
+    conda install mamba -c conda-forge && \
+    mamba install --quiet --yes -n base -c conda-forge widgetsnbextension && \
+    mamba create --quiet --yes -n sage -c conda-forge sage=$SAGE_VERSION python=$SAGE_PYTHON_VERSION && \
     conda clean --all -f -y && \
     npm cache clean --force && \
     fix-permissions $CONDA_DIR && \
