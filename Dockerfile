@@ -68,7 +68,7 @@ RUN conda update conda && \
 RUN echo $CONDA_DIR
 
 # Install sage's python kernel
-RUN sudo jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath && \
+RUN jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
