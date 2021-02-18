@@ -16,7 +16,6 @@ RUN apt-get update && \
     texlive \
     tk tk-dev \
     jq && \
-    apt-get -y upgrade && \
     apt-get -y autoremove
 
 USER $NB_UID
@@ -71,7 +70,7 @@ RUN conda update conda && \
 RUN echo $CONDA_DIR
 
 # Install sage's python kernel
-RUN jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath && \
+RUN sudo jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
