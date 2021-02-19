@@ -72,7 +72,7 @@ RUN echo $CONDA_DIR
 USER root
 
 # Install sage's python kernel
-RUN jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath
+RUN jupyter kernelspec install $CONDA_DIR/base/envs/sage/share/jupyter/kernels/sagemath
 
 USER $NB_UID
 
