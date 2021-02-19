@@ -67,15 +67,15 @@ RUN conda update conda && \
 #     fix-permissions $CONDA_DIR && \
 #     fix-permissions /home/$NB_USER
 
-RUN echo $CONDA_DIR
+# RUN echo $CONDA_DIR
 
-USER root
+# USER root
 
-# Install sage's python kernel
-RUN jupyter kernelspec install $CONDA_DIR/base/envs/sage/share/jupyter/kernels/sagemath
+# # Install sage's python kernel
+# RUN jupyter kernelspec install $CONDA_DIR/envs/sage/share/jupyter/kernels/sagemath
 
-USER $NB_UID
+# USER $NB_UID
 
-RUN fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+# RUN fix-permissions $CONDA_DIR && \
+#     fix-permissions /home/$NB_USER
 
