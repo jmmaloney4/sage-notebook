@@ -5,6 +5,8 @@ ARG SAGE_PYTHON_VERSION=3.9
 
 RUN echo "Building image with Sage $SAGE_VERSION"
 
+USER root
+
 # Sage pre-requisites and jq for manipulating json
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
