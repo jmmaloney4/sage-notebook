@@ -5,8 +5,6 @@ ARG SAGE_PYTHON_VERSION=3.9
 
 RUN echo "Building image with Sage $SAGE_VERSION"
 
-USER $NB_UID
-
 # Sage pre-requisites and jq for manipulating json
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -17,6 +15,8 @@ RUN apt-get update && \
     tk tk-dev \
     jq && \
     apt-get -y autoremove
+
+USER $NB_UID
 
 # Initialize conda for shell interaction
 RUN conda init bash
