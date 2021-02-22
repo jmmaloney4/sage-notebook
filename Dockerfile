@@ -18,8 +18,6 @@ RUN apt-get update && \
     tk tk-dev \
     aria2 \
     git \
-    build-essential \
-    m4 \
     libssl-dev \
     jq && \
     rm -rf /var/lib/apt/lists/*
@@ -32,23 +30,14 @@ USER $NB_UID
 RUN conda init bash
 
 # Install Sage conda environment
-<<<<<<< HEAD
-RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension sage=$SAGE_VERSION && \
-=======
 RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension && \
->>>>>>> 89e9967 (Try from source build)
     conda clean --all -f -y && \
     npm cache clean --force && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
-<<<<<<< HEAD
-    
-# ENTRYPOINT ["tini", "-g", "--", "conda", "run", "-n", "sage"]
-# CMD ["sage", "--jupyter", "labhub"]
-=======
 
 WORKDIR /opt/sage/
-RUN git clone --branch $SAGE_VERSION --depth 1 https://github.com/sagemath/sage.git .
+RUN git clone --branch $SAGE_VERSION --depth 1 git@github.com:sagemath/sage.git .
 RUN make configure
 ENV MAKE "make -j4"
 RUN ./configure --prefix=$PWD
@@ -64,4 +53,3 @@ RUN make ssl
 
 ENTRYPOINT ["tini", "-g", "--", "conda", "run", "-n", "sage"]
 CMD ["sage", "--jupyter", "labhub"]
->>>>>>> 89e9967 (Try from source build)
