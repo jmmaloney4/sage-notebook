@@ -19,6 +19,8 @@ RUN apt-get update && \
     aria2 \
     git \
     libssl-dev \
+    build-essential \
+    m4 \
     jq && \
     rm -rf /var/lib/apt/lists/*
 
