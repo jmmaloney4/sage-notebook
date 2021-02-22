@@ -71,7 +71,7 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64
-          build-args: "SAGE_VERSION: ${{  matrix.SAGE_VERSION }}"
+          build-args: "SAGE_VERSION=${{  matrix.SAGE_VERSION }}"
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
