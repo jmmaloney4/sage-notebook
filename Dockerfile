@@ -24,11 +24,11 @@ USER $NB_UID
 RUN conda init bash
 
 # Install Sage conda environment
-RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension && \
-    conda create --quiet --yes -n sage -c conda-forge sage=$SAGE_VERSION python=$SAGE_PYTHON_VERSION && \
+RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension sage=$SAGE_VERSION python=$SAGE_PYTHON_VERSION && \
     conda clean --all -f -y && \
     npm cache clean --force && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
-ENTRYPOINT ["tini", "-g", "--", "conda", "run", "-n", "sage"]
-CMD ["sage", "--jupyter", "labhub"]
+    
+# ENTRYPOINT ["tini", "-g", "--", "conda", "run", "-n", "sage"]
+# CMD ["sage", "--jupyter", "labhub"]
