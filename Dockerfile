@@ -18,6 +18,8 @@ RUN apt-get update && \
     tk tk-dev \
     aria2 \
     git \
+    build-essential \
+    m4 \
     libssl-dev \
     jq && \
     rm -rf /var/lib/apt/lists/*
