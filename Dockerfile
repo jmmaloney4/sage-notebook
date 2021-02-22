@@ -37,7 +37,7 @@ RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension && \
     fix-permissions /home/$NB_USER
 
 WORKDIR /opt/sage/
-RUN git clone --branch $SAGE_VERSION --depth 1 git@github.com:sagemath/sage.git .
+RUN git clone --branch $SAGE_VERSION --depth 1 https://github.com/sagemath/sage.git .
 RUN make configure
 ENV MAKE "make -j4"
 RUN ./configure --prefix=$PWD
