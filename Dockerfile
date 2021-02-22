@@ -25,7 +25,7 @@ RUN conda init bash
 RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension && \
     conda create --quiet --yes -n sage -c conda-forge sage=$SAGE_VERSION python=$SAGE_PYTHON_VERSION && \
     conda install -n sage ipykernel && \
-    conda run -n sage ipython kernel install --user --name="SageMath $SAGE_VERSION" && \
+    conda run -n sage ipython kernel install --user --name="SageMath_$SAGE_VERSION" && \
     conda clean --all -f -y && \
     npm cache clean --force && \
     fix-permissions $CONDA_DIR && \
