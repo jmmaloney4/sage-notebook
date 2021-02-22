@@ -19,9 +19,9 @@ jobs:
       fail-fast: false
       matrix:
         SAGE_VERSION:
-        - 9.0
-        - 9.1
-        - 9.2
+        - "9.0"
+        - "9.1"
+        - "9.2"
     runs-on: ubuntu-latest
 
     steps:
