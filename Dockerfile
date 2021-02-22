@@ -24,7 +24,7 @@ USER $NB_UID
 RUN conda init bash
 
 # Install Sage conda environment
-RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension sage=$SAGE_VERSION python=$SAGE_PYTHON_VERSION && \
+RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension sage=$SAGE_VERSION && \
     conda clean --all -f -y && \
     npm cache clean --force && \
     fix-permissions $CONDA_DIR && \
