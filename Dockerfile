@@ -31,4 +31,4 @@ RUN conda install --quiet --yes -n base -c conda-forge widgetsnbextension && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 ENTRYPOINT ["tini", "-g", "--", "conda", "run", "-n", "sage"]
-CMD ["sage --jupyter labhub"]
+CMD ["sage", "--jupyter", "labhub"]
